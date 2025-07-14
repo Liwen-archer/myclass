@@ -47,7 +47,7 @@ class HFDModel(nn.Module):
         )
         
         input_size_2 = int(input_size / 2)
-        self.trunk_net2 = nn.Sequential(
+        self.trunk_net_2 = nn.Sequential(
             nn.Linear(input_size_2, emb_size),
             nn.BatchNorm1d(batch),
             PositionalEncoding(seq_len, emb_size, dropout),
