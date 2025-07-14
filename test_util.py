@@ -1,6 +1,8 @@
 import torch
+import numpy as np
 import math
 import logging
+from matplotlib import pyplot as plt
 
 from utils import random_instance_masking, multitask_train, test
 
@@ -31,6 +33,8 @@ def train_model(model, optimizer, criterion_tar, criterion_task, best_model, bes
             best_model.load_state_dict(model.state_dict())
             best_optimizer.load_state_dict(optimizer.state_dict())
 
+    plot_loss(task_loss_arr)
+
     # Saved best model state at the lowest training loss is evaluated on the official test set
     metrics = test(best_model, X_train_task, y_train_task, prop['batch'], prop['nclasses'], criterion_task, prop['task_type'], prop['device'], prop['avg'])
     print('TRAIN ===> Dataset: ' + prop['dataset'] + ', Acc: ' + str(metrics[1]) )
@@ -49,3 +53,11 @@ def test_model(model, criterion_task, X_test, y_test, prop):
 
     del model
     torch.cuda.empty_cache()
+    
+
+def plot_loss(losses):
+    length = len(losses)
+    x = np.arange(1, length+1)
+    y = np.array(losses)
+    plt.plot(x, y)
+    plt.savefig('loss')
