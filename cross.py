@@ -1,8 +1,9 @@
-import test_utils as utils
+import utils
 import argparse
 import warnings
 import torch
 import logging
+from test_utils import train_model, test_model
 warnings.filterwarnings("ignore")
 
 parser = argparse.ArgumentParser()
@@ -35,8 +36,7 @@ def main():
     
 
     print('Data loading start...')
-    X_train, y_train, X_test, y_test = utils.data_loader(
-        args.dataset, prop['task_type'])
+    X_train, y_train, X_test, y_test = utils.data_loader(args.dataset)
     print('Data loading complete...')
     
     print('Data preprocessing start...')
@@ -57,10 +57,10 @@ def main():
     print('Model intialized...')
     
     print('Training start...')
-    utils.train_model(model, optimizer, criterion_tar, criterion_task, best_model, best_optimizer, X_train_task, y_train_task, X_test, y_test, prop)
+    train_model(model, optimizer, criterion_tar, criterion_task, best_model, best_optimizer, X_train_task, y_train_task, prop)
     print('Training complete...')
     
-    utils.test_model(best_model,  criterion_task, X_test, y_test, prop)
+    test_model(best_model,  criterion_task, X_test, y_test, prop)
 
 
 if __name__ == '__main__':
