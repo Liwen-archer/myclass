@@ -28,7 +28,6 @@ def get_user_specified_hyperparameters(args):
     prop = {}
     prop['batch'], prop['lr'], prop['nlayers'], prop['emb_size'], prop['nhead'], prop['task_rate'], prop['masking_ratio'], prop['task_type'] = \
         args.batch, args.lr, args.nlayers, args.emb_size, args.nhead, args.task_rate, args.masking_ratio, args.task_type
-    prop['filename'] = args.filename
     return prop
 
 
