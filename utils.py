@@ -54,13 +54,13 @@ def get_prop(args):
 
 
 def data_loader(data_path):
-    X_train = np.load(os.path.join(data_path + 'x_train.npy'),
+    X_train = np.load(os.path.join(data_path, 'x_train.npy'),
                       allow_pickle=True).astype(np.float64)
-    X_test = np.load(os.path.join(data_path + 'x_test.npy'),
+    X_test = np.load(os.path.join(data_path, 'x_test.npy'),
                      allow_pickle=True).astype(np.float64)
 
-    y_train = np.load(os.path.join(data_path + 'y_train.npy'), allow_pickle=True).astype(np.int64)
-    y_test = np.load(os.path.join(data_path + 'y_test.npy'), allow_pickle=True).astype(np.int64)
+    y_train = np.load(os.path.join(data_path, 'y_train.npy'), allow_pickle=True).astype(np.int64)
+    y_test = np.load(os.path.join(data_path, 'y_test.npy'), allow_pickle=True).astype(np.int64)
 
     return X_train, y_train, X_test, y_test
 
