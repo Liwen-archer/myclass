@@ -102,11 +102,12 @@ class HFDModel(nn.Module):
             x2, attn2 = self.transformer_encoder(x2)
             x2 = self.batch_norm(x2)
             
-            x = self.trunk_net(x.permute(1, 0, 2))
-            x, attn = self.transformer_encoder(x)
-            x = self.batch_norm(x)
+            # x = self.trunk_net(x.permute(1, 0, 2))
+            # x, attn = self.transformer_encoder(x)
+            # x = self.batch_norm(x)
             
-            input_x = x[-1] + x1[-1] + x2[-1]
+            # input_x = x[-1] + x1[-1] + x2[-1]
+            input_x = x1[-1] + x2[-1]
             
             output = self.class_net(input_x)
         
