@@ -92,22 +92,22 @@ class HFDModel(nn.Module):
         
             output = self.tar_net(x).permute(1, 0, 2)
         elif task_type == 'classification':
-            x1 = x[:, :, 0:2]
-            x1 = self.trunk_net_2(x1.permute(1, 0, 2))
-            x1, attn1 = self.transformer_encoder(x1)
-            x1 = self.batch_norm(x1)
+            # x1 = x[:, :, 0:2]
+            # x1 = self.trunk_net_2(x1.permute(1, 0, 2))
+            # x1, attn1 = self.transformer_encoder(x1)
+            # x1 = self.batch_norm(x1)
             
-            # x2 = x[:, :, 2:4]
-            # x2 = self.trunk_net_2(x2.permute(1, 0, 2))
-            # x2, attn2 = self.transformer_encoder(x2)
-            # x2 = self.batch_norm(x2)
+            x2 = x[:, :, 2:4]
+            x2 = self.trunk_net_2(x2.permute(1, 0, 2))
+            x2, attn2 = self.transformer_encoder(x2)
+            x2 = self.batch_norm(x2)
             
             x = self.trunk_net(x.permute(1, 0, 2))
             x, attn = self.transformer_encoder(x)
             x = self.batch_norm(x)
             
             # input_x = x[-1] + x1[-1] + x2[-1]
-            input_x = x[-1] + x1[-1]
+            input_x = x[-1] + x2[-1]
             
             output = self.class_net(input_x)
         
